@@ -6,7 +6,7 @@ import { api } from '../../config/api'
 
 export default {
     usuario: {
-        login(user){
+        login(user){            
             return api.post('/login',user)
         },
     }
