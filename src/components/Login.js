@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import commonUserService from "../services/API/user.service";
+import usuarioComunService from "../services/API/usuarioComun.service";
 
 function Copyright() {
   return (
@@ -60,6 +60,8 @@ export default function SignIn() {
   const [password, setPassword] = useState("");
 
   useEffect(() => console.log(email), [email]);
+  //"email": "eve.holt@reqres.in",
+  //"password": "cityslicka"
   
   
   const handleSignUp = e => {
@@ -68,14 +70,17 @@ export default function SignIn() {
       "email":email,
       "password":password
     } 
-    commonUserService.usuario.login(obj).then(rsp => {
-      console.log('rsp11111111:'); 
-                        
+    usuarioComunService.usuario.login(obj).then(rsp => {
+      
+        this.props.history.push("/dasdas");
+        console.log(rsp);
+        
       
     })
     .catch(err => {
       // handle your error here
-      console.log(err);
+      console.log(err)
+      
     })    
   } 
 

@@ -9,5 +9,10 @@ export default {
         login(user){            
             return api.post('/login',user)
         },
+
+        buscarDadosTeste(){            
+            return api.get('/')
+        }
+        
     }
 }

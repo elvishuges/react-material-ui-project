@@ -1,6 +1,6 @@
 
 var axios = require('axios');
-export const baseURL = 'https://52b7ce85.ngrok.io/'
+export const baseURL = 'https://reqres.in/api/'
 
 
 export const api = axios.create({
