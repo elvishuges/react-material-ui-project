@@ -53,12 +53,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
 
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  
+  console.log(props);
+  
   useEffect(() => console.log(email), [email]);
   //"email": "eve.holt@reqres.in",
   //"password": "cityslicka"
@@ -70,11 +72,9 @@ export default function SignIn() {
       "email":email,
       "password":password
     } 
-    usuarioComunService.usuario.login(obj).then(rsp => {
-      
-        this.props.history.push("/dasdas");
-        console.log(rsp);
-        
+    usuarioComunService.usuario.login(obj).then(rsp => {      
+        props.history.push("/listaCursos");
+        console.log(rsp);        
       
     })
     .catch(err => {
