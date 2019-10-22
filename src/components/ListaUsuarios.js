@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import * as contentful from 'contentful'
-import Course from '../components/Course'
+import Course from './Course'
+import usuario from "../services/API/usuario.service";
 const SPACE_ID = '[INSERT CONTENTFUL SPACE ID]'
 const ACCESS_TOKEN = '[INSERT CONTENTFUL ACCESS TOKEN]'
 const client = contentful.createClient({
@@ -12,12 +13,27 @@ const client = contentful.createClient({
 class CoursesList extends Component {
     state = {
         courses: [],
+        usuarios:[],
         searchString: ''
     }
     constructor() {
-        super()
-        this.getCourses()
+        super()        
     }
+
+    componentDidMount(){
+        this.getUsuarios()
+    }
+    getUsuarios = () => {
+        usuario.usuario.listausuarios().then(rsp => { 
+            console.log('resposta lista',rsp);   
+            this.setState({usuarios: rsp.data.data})           
+        })
+        .catch(err => {
+          // handle your error here
+          console.log(err)          
+        })         
+    }
+
     getCourses = () => {
         client.getEntries({
             content_type: 'course',
@@ -44,17 +60,17 @@ class CoursesList extends Component {
     render() {
         return (
             <div>
-                { this.state.courses ? (
+                { this.state.usuarios ? (
                     <div>
                         <TextField style={{padding: 24}}
                             id="searchInput"
-                            placeholder="Search for Courses"   
+                            placeholder="Search for usuários"   
                             margin="normal"
                             onChange={this.onSearchInputChange}
                             />
-                        <Grid container spacing={24} style={{padding: 24}}>
-                            { this.state.courses.map(currentCourse => (
-                                <Grid item xs={12} sm={6} lg={4} xl={3}>
+                        <Grid container spacing={10} style={{padding: 24}}>
+                            { this.state.usuarios.map(currentCourse => (
+                                <Grid key={currentCourse.id} item xs={12} sm={4} lg={4} xl={3}>
                                     <Course course={currentCourse} />
                                 </Grid>
                             ))}

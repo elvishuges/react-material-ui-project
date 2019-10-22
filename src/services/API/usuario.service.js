@@ -6,8 +6,8 @@ import { api } from '../../config/api'
 
 export default {
     usuario: {
-        buscarDados(user){            
-            return api.post('/login',user)
+        listausuarios(){            
+            return api.get('/users')
         },
         
     }

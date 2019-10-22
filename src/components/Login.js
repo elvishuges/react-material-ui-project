@@ -72,10 +72,11 @@ export default function SignIn(props) {
       "email":email,
       "password":password
     } 
-    usuarioComunService.usuario.login(obj).then(rsp => {      
-        props.history.push("/listaCursos");
-        console.log(rsp);        
-      
+    usuarioComunService.usuario.login(obj).then(rsp => { 
+        console.log(rsp);  
+        if(rsp.status === 200){
+          props.history.push("/listaUsuarios");
+        }  
     })
     .catch(err => {
       // handle your error here
